@@ -1,55 +1,30 @@
-Open Terminal.
+install git if not:
+sudo apt update && sudo apt install git
 
-Paste the text below, replacing the email used in the example with your GitHub email address.
+git --version
 
-	commd: ssh-keygen -t ed25519 -C "amir@bitspro.com"
+setup username and email (set username and email of github account provided 
+by company or personal acc if want to use it as collabortor):
+git config --global user.name "AmirPyDev"
+git config --global user.email "amirbaloch@bitspro.com"
 
-	Note: If you are using a legacy system that doesn't support the Ed25519 algorithm, use:
+verify config:
+git config --global --list
 
-		commd: ssh-keygen -t rsa -b 4096 -C "amir@bitspro.com"
+Generate SSH key:
+ssh-keygen -t ed25519 -C "amirbaloch@bitspro.com"
 
-	> Generating public/private ALGORITHM key pair.
+Start SSH agent
+eval "$(ssh-agent -s)"
 
-	Enter the file to save the key /home/
+Add SSH key to agent
+ssh-add ~/.ssh/id_ed25519
 
-	Enter passphrase: (just press enter)
+view key:
+cat ~/.ssh/id_ed25519.pub
 
- 	Enter same passphrase again: (just press enter)
-
-
- ADDING YOUR SSH KET TO SSH-AGENT
-
- Start the ssh-agent in the background.
-
- 	commd: eval "$(ssh-agent -s)"
-
- 	> Agent pid 59566
-
-
- Add your SSH private key to the ssh-agent.
-
- 	If you created your key with a different name, or if you are adding an existing key that has a different name, replace id_ed25519 in the command with the name of your private key file.
-
- 	ssh-add ~/.ssh/id_ed25519
-
- Copy the SSH public key to your clipboard.
- 	
- 	If your SSH public key file has a different name than the example code, modify the filename to match your current setup. When copying your key, don't add any newlines or whitespace.
-
- 	command: cat ~/.ssh/id_ed25519.pub
-
- 	# ^^^^this command will (most probably copy the key to clipboard)
-
-	# Then select and copy the contents of the id_ed25519.pub file
-	
-	# Go to Github profile settings > SSH and GPG keys
-
-	# Paste the copied key and (add any title, doesnt matter)
-
-	# click Add SSH key
+now add this output into github to SSH section
 
 
-
-link to Github article of how to setup SSH Key: 
-
-https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux 
+if cloning or creating new repo make sure to use SSH links:
+git remote set-url origin git@github.com:AmirPyDev/repository-name.git
